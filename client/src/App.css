@@ -1,0 +1,443 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px; /* Reduced from 40px */
+}
+
+.todo-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease;
+  margin: 0 auto;
+}
+
+.todo-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.input-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.input-section input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.input-section input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+.add-btn {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #5848e2;
+  transform: scale(1.05);
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.filter-btn {
+  flex: 1;
+  margin: 0 5px;
+  border: none;
+  padding: 8px 0;
+  border-radius: 20px;
+  background-color: #eee;
+  color: #333;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.filter-btn.active {
+  background-color: #6c63ff;
+  color: white;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+.filter-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.markall-btn,
+.deleteall-btn {
+  flex: 1;
+  margin: 5px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.markall-btn {
+  background-color: #2ecc71;
+}
+
+.markall-btn:hover {
+  background-color: #27ae60;
+  transform: scale(1.05);
+}
+
+.deleteall-btn {
+  background-color: #ff7675;
+}
+
+.deleteall-btn:hover {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+}
+
+/* Todo List */
+ul {
+  list-style: none;
+  margin: 15px 0 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  margin-bottom: 12px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  word-break: break-word;
+}
+
+/* Remove transition property */
+
+/* Remove this entire block if you don't want any layout transitions */
+li {
+  transition: none; /* Override any transitions */
+}
+
+/* Modify hover effect to only change opacity slightly */
+li:hover {
+  transform: none; /* Remove scale effect */
+  opacity: 0.95;
+}
+
+li.pending {
+  border-left: 5px solid #6c63ff;
+}
+
+li.completed {
+  border-left: 5px solid #27ae60;
+  background: linear-gradient(120deg, #e0ffe7, #e8fff0);
+  color: #777;
+  text-decoration: line-through;
+}
+
+/* Checkbox animation */
+.checkbox-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid #6c63ff;
+  transition: 0.3s;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Buttons inside todo */
+.todo-buttons {
+  margin-left: auto;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  background: none;
+  font-size: 18px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  color: #6c63ff;
+  transform: scale(1.2);
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+  transform: scale(1.2);
+}
+.todo-text {
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Smooth transition for layout */
+/* Remove transition property */
+
+/* Checkbox ticking animation */
+.checkbox-container input:checked ~ .checkmark {
+  transform: rotate(360deg) scale(1.1);
+  transition: all 0.4s ease;
+}
+.checkbox-container input:not(:checked) ~ .checkmark {
+  transform: rotate(0deg) scale(1);
+  transition: all 0.4s ease;
+}
+
+/* Subtle hover float effect */
+li:hover {
+  transform: none; /* Remove scale effect */
+  opacity: 0.95;
+}
+  
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.keyboard-shortcuts {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.keyboard-shortcuts ul {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.keyboard-shortcuts li {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 10px;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    background-attachment: fixed;
+  }
+
+  .todo-container {
+    padding: 12px;
+    width: 92%; /* Reduced from 100% */
+    margin: 0 auto;
+    border-radius: 12px;
+    max-width: 400px; /* Added max-width for smaller card */
+  }
+
+  .todo-title {
+    font-size: 1.3rem; /* Smaller title */
+    margin-bottom: 12px;
+  }
+
+  /* Adjust input section */
+  .input-section {
+    margin-bottom: 15px;
+  }
+
+  .input-section input {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  /* Adjust filter buttons */
+  .filter-buttons {
+    margin: 12px 0;
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 8px 0;
+    font-size: 13px;
+  }
+
+  /* Adjust action buttons */
+  .action-buttons {
+    margin: 12px 0;
+    gap: 6px;
+  }
+
+  .markall-btn,
+  .deleteall-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  /* Make todo items more compact */
+  li {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+  }
+
+  .todo-text {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  /* Smaller buttons */
+  .edit-btn,
+  .delete-btn {
+    padding: 6px;
+    font-size: 18px;
+  }
+
+  /* Smaller checkbox */
+  .checkbox-container {
+    margin-right: 12px;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Adjust keyboard shortcuts section */
+  .keyboard-shortcuts {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 12px;
+  }
+}
+
+/* Landscape mode optimization */
+@media screen and (max-width: 850px) and (orientation: landscape) {
+  body {
+    padding: 10px;
+  }
+
+  .todo-container {
+    max-width: 600px;
+  }
+
+  .filter-buttons,
+  .action-buttons {
+    flex-direction: row;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+}
+
+/* Fix background for all orientations */
+@media screen and (orientation: landscape) {
+  body {
+    background-attachment: fixed;
+    padding: 10px;
+  }
+}
+
+/* Better touch interactions */
+@media (hover: none) and (pointer: coarse) {
+  .edit-btn,
+  .delete-btn,
+  .filter-btn,
+  .add-btn,
+  .markall-btn,
+  .deleteall-btn {
+    min-height: 44px;
+    min-width: 44px; /* Apple's recommended minimum touch target size */
+  }
+
+  input,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent text selection on buttons */
+  button {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
