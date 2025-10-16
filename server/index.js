@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // Todo routes
-const todoRoutes = require('./routes/todoRoutes');
+const todoRoutes = require('./routes/Todoroutes');
 app.use('/api/todos', todoRoutes);
 
 // Start the server
