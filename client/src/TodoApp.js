@@ -17,7 +17,7 @@ const TodoApp = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await axios.get("http://localhost:5000/api/todos");
+      const res = await axios.get("https://mern-todo-sri.onrender.com/api/todos");
       setTodos(res.data); // Remove the sorting here
     } catch (err) {
       setError("Failed to fetch todos. Please try again.");
@@ -36,7 +36,7 @@ const TodoApp = () => {
     if (e.type === "click" || e.key === "Enter") {
       if (!title.trim()) return;
       try {
-        const res = await axios.post("http://localhost:5000/api/todos", { title });
+        const res = await axios.post("https://mern-todo-sri.onrender.com/api/todos", { title });
         setTodos((prev) => [res.data, ...prev]);
         setTitle("");
       } catch (err) {
@@ -48,7 +48,7 @@ const TodoApp = () => {
   // Toggle completed
   const toggleComplete = async (id) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/todos/${id}/toggle`);
+      const res = await axios.put(`https://mern-todo-sri.onrender.com/api/todos/${id}/toggle`);
       setTodos(prev => prev.map(t => t._id === id ? res.data : t)); // Simply update the todo
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ const TodoApp = () => {
   const deleteTodo = async (id) => {
     if (!window.confirm('Are you sure you want to delete this todo?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/todos/${id}`);
+      await axios.delete(`https://mern-todo-sri.onrender.com/api/todos/${id}`);
       setTodos((prev) => prev.filter((t) => t._id !== id));
     } catch (err) {
       setError("Failed to delete todo. Please try again.");
@@ -77,7 +77,7 @@ const TodoApp = () => {
   const saveEdit = async (id) => {
     if (!editTitle.trim()) return;
     try {
-      const res = await axios.put(`http://localhost:5000/api/todos/${id}`, { title: editTitle });
+      const res = await axios.put(`https://mern-todo-sri.onrender.com/api/todos/${id}`, { title: editTitle });
       setTodos((prev) => prev.map((t) => (t._id === id ? res.data : t)));
       setEditId(null);
       setEditTitle("");
@@ -90,7 +90,7 @@ const TodoApp = () => {
   const deleteAllCompleted = async () => {
     if (!window.confirm('Are you sure you want to delete all completed todos?')) return;
     try {
-      await axios.delete("http://localhost:5000/api/todos/completed");
+      await axios.delete("https://mern-todo-sri.onrender.com/api/todos/completed");
       setTodos((prev) => prev.filter((t) => !t.completed));
     } catch (err) {
       setError("Failed to delete completed todos. Please try again.");
@@ -105,7 +105,7 @@ const TodoApp = () => {
       const allCompleted = todos.every((t) => t.completed);
       const promises = todos.map(async (t) => {
         if (t.completed === allCompleted) {
-          const res = await axios.put(`http://localhost:5000/api/todos/${t._id}/toggle`);
+          const res = await axios.put(`https://mern-todo-sri.onrender.com/api/todos/${t._id}/toggle`);
           return res.data;
         }
         return t;
